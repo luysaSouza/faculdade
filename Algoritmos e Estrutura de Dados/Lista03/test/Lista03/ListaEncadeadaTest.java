@@ -1,5 +1,6 @@
 package Lista03;
 
+import Lista03.ListaEncadeada;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
