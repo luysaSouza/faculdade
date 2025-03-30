@@ -1,31 +1,48 @@
 package Lista05;
 
-public class PilhaLista implements Pilha{
+public class PilhaLista<T> implements Pilha<T> {
 
-    private ListaEncadeada lista;
+    private ListaEncadeada<T> lista = new ListaEncadeada<>();
 
     @Override
-    public void push(Object valor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void push(T valor) {
+        lista.inserir(valor);
     }
 
     @Override
-    public Object pop() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public T pop() {
+        if (estaVazia()) {
+            throw new PilhaVaziaException();
+        }
+
+        T valor;
+        valor = peek();
+        lista.retirar(valor);
+
+        return valor;
     }
 
     @Override
-    public Object peek() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public T peek() {
+        if (estaVazia()) {
+            throw new PilhaVaziaException();
+        }
+
+        return (T) lista.getPrimeiro().getInfo();
     }
 
     @Override
     public boolean estaVazia() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return lista.estaVazia();
     }
 
     @Override
     public void liberar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        lista = new ListaEncadeada<>();
+    }
+
+    @Override
+    public String toString() {
+        return lista.toString();
     }
 }

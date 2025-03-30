@@ -30,6 +30,7 @@ public class PilhaVetor<T> implements Pilha<T> {
         
         T valor;
         valor = peek();
+        info[tamanho - 1] = null;
         tamanho = tamanho - 1;
         
         return valor;
