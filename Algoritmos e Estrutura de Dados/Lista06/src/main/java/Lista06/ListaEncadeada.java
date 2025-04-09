@@ -10,6 +10,7 @@ public class ListaEncadeada<T> {
      */
     public ListaEncadeada() {
         this.primeiro = null;
+        this.ultimo = null;
     }
 
     /**
@@ -30,6 +31,11 @@ public class ListaEncadeada<T> {
         NoLista<T> novo = new NoLista<>();
         novo.setInfo(valor);
         novo.setProximo(primeiro);
+
+        if (estaVazia()) {
+            ultimo = novo;
+        }
+
         this.primeiro = novo;
     }
 
@@ -88,10 +94,14 @@ public class ListaEncadeada<T> {
         }
 
         if (p != null) {
-            if (p == primeiro) {
+            if (anterior == null) {
                 this.primeiro = p.getProximo();
             } else {
                 anterior.setProximo(p.getProximo());
+            }
+
+            if (p == ultimo) { //removendo o ultimo no
+                ultimo = anterior;
             }
         }
     }
@@ -186,15 +196,22 @@ public class ListaEncadeada<T> {
         return nova;
     }
 
+    /**
+     * Insere um dado no final da lista encadeada
+     *
+     * @param valor a ser inserido
+     */
     public void inserirNoFinal(T valor) {
         NoLista<T> novo = new NoLista<>();
         novo.setInfo(valor);
+        novo.setProximo(null);
 
         if (estaVazia()) {
             this.primeiro = novo;
         } else {
             this.ultimo.setProximo(novo);
         }
+
         this.ultimo = novo;
     }
 }
