@@ -2,16 +2,37 @@ package Lista06;
 
 public class App {
     public static void main(String[] args) {
-        FilaLista<Integer> f = new FilaLista<>();
+        FilaVetor<Integer> f = new FilaVetor<>(8);
 
-        f.inserir(10);
-        f.inserir(20);
-        f.inserir(30);
-        f.inserir(40);
-        f.inserir(50);
-        f.inserir(60);
-        System.out.println(f.retirar());
+        f.inserir(0);
+        f.inserir(0);
+        f.inserir(3);
+        f.inserir(1);
+        f.inserir(5);
+        f.inserir(5);
 
-        System.out.println(f.toString());
+        f.inserir(5);
+
+        f.retirar();
+        f.retirar();
+
+        System.out.printf(f.toString() + "\n");
+
+        FilaVetor<Integer> f2 = new FilaVetor<>(10);
+
+        f2.inserir(30);
+        f2.inserir(40);
+        f2.inserir(40);
+        f2.inserir(40);
+        f2.inserir(40);
+        f2.inserir(40);
+        f2.inserir(40);
+        f2.inserir(40);
+        f2.inserir(40);
+        f2.inserir(40);
+
+        FilaVetor<Integer> f3 = f.criarFilaConcatenada(f2);
+
+        System.out.printf(f3.toString());
     }
 }
