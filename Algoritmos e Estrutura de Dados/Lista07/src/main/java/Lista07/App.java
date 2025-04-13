@@ -20,6 +20,6 @@ public class App {
         n3.setEsquerda(n5);
         n3.setDireita(n6);
 
-        System.out.println(arvore.contarNos());
+        System.out.println(arvore.toString());
     }
 }

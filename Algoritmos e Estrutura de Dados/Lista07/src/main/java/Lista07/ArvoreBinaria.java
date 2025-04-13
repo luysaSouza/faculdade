@@ -35,21 +35,13 @@ public class ArvoreBinaria<T> {
 
     private String arvorePre(NoArvoreBinaria<T> no) {
         if (no == null) {
-            return "";
+            return "<>";
         }
 
-        String resultado = no.getInfo().toString();
-        String sae = arvorePre(no.getEsquerda());
-        String sad = arvorePre(no.getDireita());
-
-        if (!sae.isEmpty()) {
-            resultado += " " + sae;
-        }
-
-        if (!sad.isEmpty()) {
-            resultado += " " + sad;
-        }
-
+        String resultado = "<" + no.getInfo();
+        resultado += arvorePre(no.getEsquerda());
+        resultado += arvorePre(no.getDireita());
+        resultado += ">";
         return resultado;
     }
 
@@ -58,7 +50,7 @@ public class ArvoreBinaria<T> {
     }
 
     private int contarNos(NoArvoreBinaria<T> no) {
-        if (no == null){
+        if (no == null) {
             return 0;
         }
 
