@@ -8,6 +8,8 @@ public class NoArvoreBinaria<T> {
 
     public NoArvoreBinaria(T info) {
         this.info = info;
+        this.esquerda = null;
+        this.direita = null;
     }
 
     public NoArvoreBinaria( T info, NoArvoreBinaria<T> esq, NoArvoreBinaria<T> dir) {
