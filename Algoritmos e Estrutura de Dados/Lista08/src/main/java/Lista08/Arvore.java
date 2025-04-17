@@ -79,8 +79,7 @@ public class Arvore<T> {
 
         NoArvore<T> p = no.getPrimeiro();
         while (p != null) {
-            contarNos(p);
-            qntNos++;
+            qntNos += contarNos(p);
             p = p.getProximo();
         }
 
