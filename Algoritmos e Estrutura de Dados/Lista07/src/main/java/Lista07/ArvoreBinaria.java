@@ -114,13 +114,30 @@ public class ArvoreBinaria<T> {
                 arvorePre(no.getEsquerda()) +
                 arvorePre(no.getDireita()) +
                 ">";
+    }
 
-        // MEU
-        // String resultado = "<" + no.getInfo();
-        // resultado += arvorePre(no.getEsquerda());
-        // resultado += arvorePre(no.getDireita());
-        // resultado += ">";
-        // return resultado;
+    private String arvoreOrdem(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return "<>";
+        }
+
+        return "<" +
+                arvoreOrdem(no.getEsquerda()) +
+                no.getInfo() +
+                arvoreOrdem(no.getDireita()) +
+                ">";
+    }
+
+    private String arvorePos(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return "<>";
+        }
+
+        return "<" +
+                arvorePos(no.getEsquerda()) +
+                arvorePos(no.getDireita()) +
+                no.getInfo() +
+                ">";
     }
 
     /**
