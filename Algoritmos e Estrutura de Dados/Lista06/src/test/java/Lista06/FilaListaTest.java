@@ -25,7 +25,7 @@ public class FilaListaTest {
     @Test
     public void test03_DadosEnfileiradosEDesenfileradosCorretamente() {
         FilaLista<Integer> fila = new FilaLista<>();
-
+    
         fila.inserir(10);
         fila.inserir(20);
         fila.inserir(30);

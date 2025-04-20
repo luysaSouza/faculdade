@@ -28,6 +28,7 @@ public class FilaVetor<T> implements Fila<T> {
     public void inserir(T valor) {
         if (tamanho == limite) {
             throw new FilaCheiaException();
+            //redimensionar();
         }
 
         int posicaoInserir = (inicio + tamanho) % limite;
@@ -143,5 +144,19 @@ public class FilaVetor<T> implements Fila<T> {
      */
     public int getLimite() {
         return limite;
+    }
+
+    private void redimensionar() {
+        int novoLimite = limite * 2;
+        Object[] novoInfo = new Object[novoLimite];
+
+        for (int i = 0; i < tamanho; i++) {
+            int indiceAntigo = (inicio + i) % limite;
+            novoInfo[i] = info[indiceAntigo];
+        }
+
+        info = novoInfo;
+        limite = novoLimite;
+        inicio = 0;
     }
 }
