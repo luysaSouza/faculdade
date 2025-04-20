@@ -93,7 +93,7 @@ public class ArvoreBinaria<T> {
      */
     @Override
     public String toString() {
-        return arvorePre(raiz);
+        return arvorePre(raiz) + "\n" + arvoreOrdem(raiz) + "\n" + arvorePos(raiz);
     }
 
     /**
