@@ -2,27 +2,30 @@ package Lista08;
 
 public class App {
     public static void main(String[] args) {
-        NoArvore<String> no1 = new NoArvore<>("A");
-        NoArvore<String> no2 = new NoArvore<>("B");
-        NoArvore<String> no3 = new NoArvore<>("C");
-        NoArvore<String> no4 = new NoArvore<>("D");
-        NoArvore<String> no5 = new NoArvore<>("E");
-        NoArvore<String> no6 = new NoArvore<>("F");
-        NoArvore<String> no7 = new NoArvore<>("G");
+        // Criando uma árvore de inteiros
+        Arvore<Integer> arvore = new Arvore<>();
 
-        no1.inserirFilho(no3);
-        no1.inserirFilho(no2);
+        // Criando alguns nós (exemplo de NoArvore)
+        NoArvore<Integer> raiz = new NoArvore<>(1); // Raiz
+        NoArvore<Integer> no2 = new NoArvore<>(2);
+        NoArvore<Integer> no3 = new NoArvore<>(3);
+        NoArvore<Integer> no4 = new NoArvore<>(4);
+        NoArvore<Integer> no5 = new NoArvore<>(5);
 
-        no2.inserirFilho(no5);
-        no2.inserirFilho(no4);
+        // Estabelecendo os filhos da raiz (arvore de exemplo)
+        raiz.setPrimeiro(no2);
+        no2.setProximo(no3);
+        no3.setProximo(no4);
+        no4.setProximo(no5);
 
-        no5.inserirFilho(no7);
+        no4.inserirFilho(no5);
+        no4.inserirFilho(no3);
+        no4.inserirFilho(no2);
 
-        no3.inserirFilho(no6);
-
-        Arvore<String> arvore = new Arvore<>();
-
-        arvore.setRaiz(no1);
+        arvore.setRaiz(raiz);
+        // Testando o método "buscarMaiorProfundidade"
+        NoArvore<Integer> noMaiorProfundidade = arvore.buscarMaiorProfundidade();
+        System.out.println("Nó de maior profundidade: " + (noMaiorProfundidade != null ? noMaiorProfundidade.getInfo() : "Árvore vazia"));
 
         System.out.println(arvore.toString());
     }
