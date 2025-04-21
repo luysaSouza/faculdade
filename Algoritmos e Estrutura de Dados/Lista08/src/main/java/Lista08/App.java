@@ -2,31 +2,79 @@ package Lista08;
 
 public class App {
     public static void main(String[] args) {
-        // Criando uma árvore de inteiros
-        Arvore<Integer> arvore = new Arvore<>();
+        Arvore<String> arvore = new Arvore<>();
 
-        // Criando alguns nós (exemplo de NoArvore)
-        NoArvore<Integer> raiz = new NoArvore<>(1); // Raiz
-        NoArvore<Integer> no2 = new NoArvore<>(2);
-        NoArvore<Integer> no3 = new NoArvore<>(3);
-        NoArvore<Integer> no4 = new NoArvore<>(4);
-        NoArvore<Integer> no5 = new NoArvore<>(5);
+        //         A
+        //      / | \
+        //     B  C  D
+        //    / \
+        //   E   F
 
-        // Estabelecendo os filhos da raiz (arvore de exemplo)
-        raiz.setPrimeiro(no2);
-        no2.setProximo(no3);
-        no3.setProximo(no4);
-        no4.setProximo(no5);
+        // Montando a árvore manualmente:
+        NoArvore<String> raiz = new NoArvore<>("A");
+        NoArvore<String> b = new NoArvore<>("B");
+        NoArvore<String> c = new NoArvore<>("C");
+        NoArvore<String> d = new NoArvore<>("D");
+        NoArvore<String> e = new NoArvore<>("E");
+        NoArvore<String> f = new NoArvore<>("F");
 
-        no4.inserirFilho(no5);
-        no4.inserirFilho(no3);
-        no4.inserirFilho(no2);
+        // Montando filhos
+        raiz.setPrimeiro(b);
+        b.setProximo(c);
+        c.setProximo(d);
+        b.setPrimeiro(e);
+        e.setProximo(f);
+        // ou
+        // raiz.inserirFilho(d);
+        // raiz.inserirFilho(c);
+        // raiz.inserirFilho(b);
+        // b.inserirFilho(f);
+        // b.inserirFilho(e);
 
         arvore.setRaiz(raiz);
-        // Testando o método "buscarMaiorProfundidade"
-        NoArvore<Integer> noMaiorProfundidade = arvore.buscarMaiorProfundidade();
-        System.out.println("Nó de maior profundidade: " + (noMaiorProfundidade != null ? noMaiorProfundidade.getInfo() : "Árvore vazia"));
 
-        System.out.println(arvore.toString());
+        // Exibição da árvore
+        System.out.println("Árvore: " + arvore);
+
+        // Testa pertence
+        System.out.println("Pertence B? " + arvore.pertence("B"));
+        System.out.println("Pertence Z? " + arvore.pertence("Z"));
+
+        // Conta os nós
+        System.out.println("Quantidade de nós: " + arvore.contarNos());
+
+        // Conta folhas
+        System.out.println("Quantidade de folhas: " + arvore.contarFolhas());
+
+        // Altura
+        System.out.println("Altura da árvore: " + arvore.altura());
+
+        // Buscar nó de maior profundidade
+        NoArvore<String> maisProfundo = arvore.buscarMaiorProfundidade();
+        if (maisProfundo != null)
+            System.out.println("Nó mais profundo: " + maisProfundo.getInfo());
+
+        // Encontrar pai de um nó
+        NoArvore<String> paiE = arvore.encontrarPai("E");
+        if (paiE != null)
+            System.out.println("Pai de E: " + paiE.getInfo());
+
+        // Buscar valor máximo (assumindo que as letras são comparáveis)
+        NoArvore<String> max = arvore.buscarMaximo();
+        if (max != null)
+            System.out.println("Maior valor da árvore: " + max.getInfo());
+
+        // Contar nós no nível
+        int nivel = 2;
+        System.out.println("Nós no nível " + nivel + ": " + arvore.contarNosNoNivel(2));
+
+        // Inverter árvore
+        arvore.inverter();
+        System.out.println("Árvore invertida: " + arvore);
+
+        // Remover um nó
+        boolean removido = arvore.remover("B");
+        System.out.println("Removeu B? " + removido);
+        System.out.println("Árvore após remoção: " + arvore);
     }
 }
