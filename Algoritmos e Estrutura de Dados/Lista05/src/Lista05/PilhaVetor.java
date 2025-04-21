@@ -6,6 +6,14 @@ public class PilhaVetor<T> implements Pilha<T> {
     private int limite;
     private int tamanho;
 
+    public int getTamanho() {
+        return tamanho;
+    }
+
+    public Object[] getInfo() {
+        return info;
+    }
+
     /**
      * Cria uma pilha com o tamanho especifico
      *
@@ -26,6 +34,7 @@ public class PilhaVetor<T> implements Pilha<T> {
     public void push(T valor) {
         if (tamanho == limite) {
             throw new PilhaCheiaException();
+            // redimensionar();
         }
 
         this.info[tamanho] = valor;
@@ -130,5 +139,136 @@ public class PilhaVetor<T> implements Pilha<T> {
         for (int i = 0; i < p.tamanho; i++) {
             this.push((T) p.info[i]);
         }
+    }
+
+    private void redimensionar() {
+        int novoLimite = limite * 2;
+        Object[] novoInfo = new Object[novoLimite];
+
+        for (int i = 0; i < tamanho; i++) {
+            novoInfo[i] = info[i];
+        }
+
+        info = novoInfo;
+        limite = novoLimite;
+    }
+
+    /**
+     * Retorna o menor valor presente na pilha.
+     *
+     * @return O valor mínimo encontrado na pilha.
+     * @throws PilhaVaziaException Se a pilha estiver vazia.
+     */
+    public T minimo() {
+        if (estaVazia()) {
+            throw new PilhaVaziaException();
+        }
+
+        T minimo = (T) info[0];
+        for (int i = 1; i < tamanho; i++) {
+            if (((Comparable<T>) info[i]).compareTo(minimo) < 0) {
+                minimo = (T) info[i];
+            }
+        }
+
+        return minimo;
+    }
+
+    /**
+     * Retorna uma nova pilha contendo os mesmos elementos da pilha atual, mas com a ordem invertida.
+     * A pilha original não é modificada.
+     *
+     * @return Uma nova pilha com os elementos invertidos.
+     */
+    public PilhaVetor<T> invertida() {
+        PilhaVetor<T> pilhaInvertida = new PilhaVetor<>(this.limite);
+
+        for (int i = tamanho - 1; i >= 0; i--) {
+            pilhaInvertida.push((T) info[i]);
+        }
+
+        return pilhaInvertida;
+    }
+
+    /**
+     * Remove a primeira ocorrência de um valor específico da pilha.
+     * Caso o valor não seja encontrado, o metodo retorna false
+     * Caso contrário, a pilha será reordenada para "ocupar" o espaço deixado pelo valor removido.
+     *
+     * @param valor O valor a ser removido da pilha.
+     * @return true se o valor foi removido com sucesso, false caso contrário.
+     */
+    public boolean remover(T valor) {
+        if (estaVazia()) {
+            return false;
+        }
+
+        int indice = -1;
+        for (int i = 0; i < tamanho; i++) {
+            if (info[i].equals(valor)) {
+                indice = i;
+                break;
+            }
+        }
+
+        if (indice == -1) {
+            return false; // Valor não encontrado
+        }
+
+        // Desloca os elementos para preencher o espaço
+        for (int i = indice; i < tamanho - 1; i++) {
+            info[i] = info[i + 1];
+        }
+
+        info[tamanho - 1] = null;
+        tamanho--;
+        return true;
+    }
+
+    /**
+     * Conta quantas vezes um valor específico aparece na pilha.
+     *
+     * @param valor O valor a ser contado na pilha.
+     * @return O número de ocorrências do valor na pilha.
+     */
+    public int contarOcorrencias(T valor) {
+        int contador = 0;
+
+        for (int i = 0; i < tamanho; i++) {
+            if (info[i].equals(valor)) {
+                contador++;
+            }
+        }
+
+        return contador;
+    }
+
+    /**
+     * Dobra o valor do topo da pilha, ou seja, empilha o valor atual do topo duas vezes.
+     *
+     * @throws PilhaVaziaException Se a pilha estiver vazia.
+     */
+    public void duplicarTopo() {
+        if (estaVazia()) {
+            throw new PilhaVaziaException();
+        }
+
+        T topo = peek();
+        push(topo); // Empilha o topo novamente
+    }
+
+    /**
+     * Busca a posição de um elemento a partir do topo da pilha.
+     *
+     * @param valor O valor a ser buscado na pilha.
+     * @return A posição do valor a partir do topo, ou -1 se não encontrado.
+     */
+    public int buscar(T valor) {
+        for (int i = tamanho - 1, pos = 0; i >= 0; i--, pos++) {
+            if (info[i].equals(valor)) {
+                return pos;
+            }
+        }
+        return -1;
     }
 }

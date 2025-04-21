@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista01/Lista01.iml" filepath="$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista01/Lista01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista02/Lista02.iml" filepath="$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista02/Lista02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista03/Lista03.iml" filepath="$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista03/Lista03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista04/Lista04.iml" filepath="$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista04/Lista04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista05/Lista05.iml" filepath="$PROJECT_DIR$/Algoritmos e Estrutura de Dados/Lista05/Lista05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/faculdade.iml" filepath="$PROJECT_DIR$/.idea/faculdade.iml" />
+    </modules>
+  </component>
+</project>

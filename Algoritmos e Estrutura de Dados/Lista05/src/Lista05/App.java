@@ -4,19 +4,19 @@ public class App {
 
     public static void main(String[] args) {
 
-        PilhaVetor<Integer> pilha = new PilhaVetor<>(5);
+        PilhaVetor<Integer> pilhaV = new PilhaVetor<>(10);
+        pilhaV.push(1);
+        pilhaV.push(2);
+        pilhaV.push(3); // Topo
 
-        pilha.push(10);
-        pilha.push(20);
-        pilha.push(30);
+        PilhaLista<Integer> pilhaL = new PilhaLista<>();
+        pilhaL.push(10);
+        pilhaL.push(20); // Topo
 
-        PilhaVetor<Integer> pilha2 = new PilhaVetor<>(2);
+// Após a concatenação:
+        pilhaL.concatenarComPilhaVetor(pilhaV);
 
-        pilha2.push(40);
-        pilha2.push(50);
+        System.out.println(pilhaL.toString());
 
-        pilha.concatenar(pilha2);
-        
-        System.out.println(pilha.toString());
     }
 }

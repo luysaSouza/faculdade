@@ -163,4 +163,64 @@ public class ArvoreBinaria<T> {
         return 1 + contarNos(no.getEsquerda()) +
                    contarNos(no.getDireita());
     }
+
+    /**
+     * Calcula a altura da árvore binária.
+     * A altura é o número máximo de arestas entre a raiz e a folha mais distante.
+     *
+     * @return a altura da árvore.
+     */
+    public int calcularAltura() {
+        return calcularAltura(raiz);
+    }
+
+    /**
+     * Calcula a altura da subárvore iniciada no nó fornecido.
+     *
+     * @param no o nó a partir do qual a altura será calculada.
+     * @return a altura da subárvore iniciada em {@code no}.
+     */
+    private int calcularAltura(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return -1;
+        }
+
+        return Math.max(calcularAltura(no.getEsquerda()), calcularAltura(no.getDireita())) + 1;
+    }
+
+    public void contarPaisFilhosFolhas() {
+        int[] contagem = new int[3];
+        contarPaisFilhosFolhas(raiz, contagem);
+
+        System.out.println("Pais: " + contagem[0]);
+        System.out.println("Filhos: " + contagem[1]);
+        System.out.println("Folhas: " + contagem[2]);
+    }
+
+    /**
+     * Metodo recursivo para contar pais, filhos e folhas.
+     */
+    private void contarPaisFilhosFolhas(NoArvoreBinaria<T> no, int[] contagem) {
+        if (no == null) {
+            return;
+        }
+
+        if (no.getEsquerda() != null || no.getDireita() != null) {
+            contagem[0]++;
+        }
+
+        if (no.getEsquerda() != null) {
+            contagem[1]++;
+        }
+        if (no.getDireita() != null) {
+            contagem[1]++;
+        }
+
+        if (no.getEsquerda() == null && no.getDireita() == null) {
+            contagem[2]++;
+        }
+
+        contarPaisFilhosFolhas(no.getEsquerda(), contagem);
+        contarPaisFilhosFolhas(no.getDireita(), contagem);
+    }
 }
