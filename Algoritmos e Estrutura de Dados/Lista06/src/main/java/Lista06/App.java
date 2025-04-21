@@ -2,7 +2,7 @@ package Lista06;
 
 public class App {
     public static void main(String[] args) {
-        FilaVetor<Integer> f = new FilaVetor<>(2);
+        FilaVetor<Integer> f = new FilaVetor<>(10);
 
         f.inserir(1);
         f.inserir(2);
@@ -13,6 +13,6 @@ public class App {
         f.inserir(7);
         f.inserir(8);
 
-        System.out.println(f.toString());
+        System.out.println(f.posicaoDoElemento(8));
     }
 }
