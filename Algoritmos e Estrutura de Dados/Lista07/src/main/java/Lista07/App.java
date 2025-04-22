@@ -10,6 +10,7 @@ public class App {
         //     / \     \
         //    3   7     20
 
+
         // Criando os nós manualmente
         NoArvoreBinaria<Integer> n1 = new NoArvoreBinaria<>(10);
         NoArvoreBinaria<Integer> n2 = new NoArvoreBinaria<>(5);
@@ -57,5 +58,38 @@ public class App {
         System.out.println("Removendo o nó 10 (raiz)...");
         arvore.remover(10);
         System.out.println(arvore);
+
+        ArvoreBinaria<Integer> arvore2 = new ArvoreBinaria<>();
+
+        // Criando os nós manualmente
+        NoArvoreBinaria<Integer> no1 = new NoArvoreBinaria<>(1);
+        NoArvoreBinaria<Integer> no2 = new NoArvoreBinaria<>(2);
+        NoArvoreBinaria<Integer> no3 = new NoArvoreBinaria<>(3);
+        NoArvoreBinaria<Integer> no4 = new NoArvoreBinaria<>(4);
+        NoArvoreBinaria<Integer> no5 = new NoArvoreBinaria<>(5);
+
+        // Montando a árvore:
+        //         1
+        //        / \
+        //       2   3
+        //      / \
+        //     4   5
+        no1.setEsquerda(no2);
+        no1.setDireita(no3);
+        no2.setEsquerda(no4);
+        no2.setDireita(no5);
+
+        arvore2.setRaiz(no1);
+
+        // Testando encontrarPai
+        System.out.println("Pai do 2: " + arvore2.encontrarPai(5)); // Deve imprimir 1
+        System.out.println("Pai do 4: " + arvore2.encontrarPai(4)); // Deve imprimir 2
+        System.out.println("Pai do 1: " + arvore2.encontrarPai(1)); // Deve imprimir null
+
+        // Testando mostrarFilhos
+        arvore2.mostrarFilhos(1); // Deve mostrar: Filhos de 1: 2 3
+        arvore2.mostrarFilhos(2); // Deve mostrar: Filhos de 2: 4 5
+        arvore2.mostrarFilhos(5); // Deve mostrar: Filhos de 5: Não tem filhos.
+        arvore2.mostrarFilhos(9); // Deve mostrar: Nó não encontrado.
     }
 }

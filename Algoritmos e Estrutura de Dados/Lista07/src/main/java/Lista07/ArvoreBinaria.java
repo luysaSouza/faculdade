@@ -439,4 +439,55 @@ public class ArvoreBinaria<T> {
 
         return count + contarNosComUmFilho(no.getEsquerda()) + contarNosComUmFilho(no.getDireita());
     }
+
+    public T encontrarPai(T valor) {
+        return encontrarPai(raiz, valor);
+    }
+
+    private T encontrarPai(NoArvoreBinaria<T> no, T valor) {
+        if (no == null) return null;
+
+        if ((no.getEsquerda() != null && no.getEsquerda().getInfo().equals(valor)) ||
+                (no.getDireita() != null && no.getDireita().getInfo().equals(valor))) {
+            return no.getInfo();
+        }
+
+        T paiEsquerda = encontrarPai(no.getEsquerda(), valor);
+        if (paiEsquerda != null) return paiEsquerda;
+
+        return encontrarPai(no.getDireita(), valor);
+    }
+
+    public void mostrarFilhos(T valor) {
+        NoArvoreBinaria<T> no = buscarNo(raiz, valor);
+
+        if (no == null) {
+            System.out.println("Nó não encontrado.");
+            return;
+        }
+
+        System.out.print("Filhos de " + valor + ": ");
+        if (no.getEsquerda() != null) {
+            System.out.print(no.getEsquerda().getInfo() + " ");
+        }
+        if (no.getDireita() != null) {
+            System.out.print(no.getDireita().getInfo());
+        }
+        if (no.getEsquerda() == null && no.getDireita() == null) {
+            System.out.print("Não tem filhos.");
+        }
+        System.out.println();
+    }
+
+    private NoArvoreBinaria<T> buscarNo(NoArvoreBinaria<T> no, T valor) {
+        if (no == null) return null;
+
+        if (no.getInfo().equals(valor)) return no;
+
+        NoArvoreBinaria<T> resultado = buscarNo(no.getEsquerda(), valor);
+        if (resultado != null) return resultado;
+
+        return buscarNo(no.getDireita(), valor);
+    }
+
 }
