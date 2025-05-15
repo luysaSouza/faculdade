@@ -91,5 +91,14 @@ public class App {
         arvore2.mostrarFilhos(2); // Deve mostrar: Filhos de 2: 4 5
         arvore2.mostrarFilhos(5); // Deve mostrar: Filhos de 5: Não tem filhos.
         arvore2.mostrarFilhos(9); // Deve mostrar: Nó não encontrado.
+
+        ArvoreBinaria<String> arvoreString = new ArvoreBinaria<>();
+
+        // Exemplo: árvore com raiz A, B à esquerda e C à direita
+        String expressao = "<1<2<4<><>><5<><>>><3<><>>>";
+
+        arvoreString.construirArvore(expressao);
+
+        System.out.println(arvoreString.toString());
     }
 }

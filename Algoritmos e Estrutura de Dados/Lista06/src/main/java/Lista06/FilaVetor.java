@@ -122,6 +122,11 @@ public class FilaVetor<T> implements Fila<T> {
             resultado += info[indice];
         }
 
+        for (int i = 0; i < info.length; i++) {
+            int indice = (inicio + i) % limite;
+            System.out.print(info[i] + " ");
+        }
+
         return resultado;
 
         // PROFESSOR
@@ -146,140 +151,22 @@ public class FilaVetor<T> implements Fila<T> {
         return limite;
     }
 
-    private void redimensionar() {
-        int novoLimite = limite * 2;
-        Object[] novoInfo = new Object[novoLimite];
+    public int getInicio() {
+        return inicio;
+    }
+
+    public void encolher() {
+        if (estaVazia()) {
+            throw new FilaVaziaException();
+        }
+
+        int posicao = this.inicio;
 
         for (int i = 0; i < tamanho; i++) {
-            int indiceAntigo = (inicio + i) % limite;
-            novoInfo[i] = info[indiceAntigo];
+            info[i] = info[posicao];
+            posicao = (posicao + 1) % limite;
         }
-
-        info = novoInfo;
-        limite = novoLimite;
-        inicio = 0;
-    }
-
-    /**
-     * Inverte a ordem dos elementos da fila atual.
-     * O primeiro elemento passa a ser o último e assim por diante.
-     * Essa operação é feita in-place, sem utilizar estruturas auxiliares.
-     */
-    public void inverter() {
-        for (int i = 0; i < tamanho / 2; i++) {
-            int indice1 = (inicio + i) % limite;
-            int indice2 = (inicio + tamanho - 1 - i) % limite;
-
-            Object temp = info[indice1];
-            info[indice1] = info[indice2];
-            info[indice2] = temp;
-        }
-    }
-
-    /**
-     * Conta quantas vezes um determinado valor aparece na fila.
-     *
-     * @param valor Valor a ser buscado na fila.
-     * @return Quantidade de ocorrências do valor na fila.
-     */
-    public int contarOcorrencias(T valor) {
-        int contador = 0;
-
-        for (int i = 0; i < tamanho; i++) {
-            int indice = (inicio + i) % limite;
-            if (info[indice].equals(valor)) {
-                contador++;
-            }
-        }
-
-        return contador;
-    }
-
-    /**
-     * Insere um elemento no início da fila, deslocando os elementos existentes.
-     *
-     * @param valor O valor a ser inserido no início da fila.
-     * @throws FilaCheiaException Se a fila estiver cheia.
-     */
-    public void inserirComPrioridade(T valor) {
-        if (tamanho == limite) {
-            throw new FilaCheiaException();
-        }
-
-        inicio = (inicio - 1 + limite) % limite;
-        info[inicio] = valor;
-        tamanho++;
-    }
-
-    /**
-     * Verifica se a fila atual é igual a outra fila passada por parâmetro.
-     * A igualdade considera o mesmo tamanho e os mesmos elementos na mesma ordem.
-     *
-     * @param outra A outra fila a ser comparada.
-     * @return true se forem iguais; false caso contrário.
-     */
-    public boolean ehIgual(FilaVetor<T> outra) {
-        if (this.tamanho != outra.tamanho) {
-            return false;
-        }
-
-        for (int i = 0; i < this.tamanho; i++) {
-            int indice1 = (this.inicio + i) % this.limite;
-            int indice2 = (outra.inicio + i) % outra.limite;
-
-            if (!this.info[indice1].equals(outra.info[indice2])) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Retorna a posição do valor na fila, considerando o início como posição 0.
-     *
-     * @param valor Valor a ser buscado.
-     * @return Posição relativa na fila, ou -1 se não estiver presente.
-     */
-    public int posicaoDoElemento(T valor) {
-        for (int i = 0; i < tamanho; i++) {
-            int indice = (inicio + i) % limite;
-            if (info[indice].equals(valor)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * Remove a primeira ocorrência do valor especificado na fila.
-     * Se o valor não estiver presente, a fila permanece inalterada.
-     *
-     * @param valor Valor a ser removido.
-     * @return true se o valor foi encontrado e removido; false caso contrário.
-     */
-    public boolean removerElemento(T valor) {
-        boolean encontrado = false;
-        FilaVetor<T> auxiliar = new FilaVetor<>(limite);
-
-        for (int i = 0; i < tamanho; i++) {
-            int indice = (inicio + i) % limite;
-            T atual = (T) info[indice];
-
-            if (!encontrado && atual.equals(valor)) {
-                encontrado = true; // não insere na auxiliar
-            } else {
-                auxiliar.inserir(atual);
-            }
-        }
-
-        if (encontrado) {
-            this.info = auxiliar.info;
-            this.inicio = auxiliar.inicio;
-            this.tamanho = auxiliar.tamanho;
-            // O limite não muda pois foi criado com o mesmo tamanho
-        }
-
-        return encontrado;
+        this.limite = tamanho;
+        this.inicio = 0;
     }
 }
