@@ -47,4 +47,18 @@ public class OrdenacaoBolhaTest {
 
         assertEquals(ordenacao.getInfo(), esperado);
     }
+
+    @Test
+    public void test04_ValidarOrdenacaoQuicksort() {
+        Integer[] dados = {70,2,88,15,90,30};
+
+        OrdenacaoMergeSort<Integer> ordenacao = new OrdenacaoMergeSort<>();
+
+        ordenacao.setInfo(dados);
+        ordenacao.ordenar();
+
+        Integer[] esperado = {2,15,30,70,88,90};
+
+        assertEquals(ordenacao.getInfo(), esperado);
+    }
 }
