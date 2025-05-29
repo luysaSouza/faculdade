@@ -2,7 +2,7 @@ package Lista09;
 
 import java.util.Objects;
 
-public class NoMapa<T extends Comparable<T>> {
+public class NoMapa<T> {
 
     private int chave;
     private T valor;
@@ -25,21 +25,14 @@ public class NoMapa<T extends Comparable<T>> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
-            return true;
-        }
-        if (o == null) {
-            return false;
-        }
-        if (getClass() != o.getClass()){
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NoMapa<?> noMapa = (NoMapa<?>) o;
+        return chave == noMapa.chave;
+    }
 
-        NoMapa<T> other = (NoMapa) o;
-        if (chave != other.chave){
-            return false;
-        }
-
-        return true;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(chave);
     }
 }
