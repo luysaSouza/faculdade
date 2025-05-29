@@ -1,4 +1,4 @@
-package Lista11;
+package Lista11.Busca;
 
 public class BuscaLinear<T> extends BuscaAbstract{
 

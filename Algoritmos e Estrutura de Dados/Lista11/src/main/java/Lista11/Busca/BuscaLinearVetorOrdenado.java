@@ -1,4 +1,4 @@
-package Lista11;
+package Lista11.Busca;
 
 public class BuscaLinearVetorOrdenado<T extends Comparable<T>> extends BuscaAbstract {
 
