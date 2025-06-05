@@ -12,7 +12,7 @@ public class BuscaBinaria<T extends Comparable<T>> extends BuscaAbstract{
             int meio = (inicio + fim) / 2;
             T elemento = (T) getInfo()[meio];
 
-            int comparacao = valor.compareTo(elemento);
+            int comparacao = valor.compareTo(elemento); //o compareTo devolve um número positivo negativo ou zero, por isso a comparacao com 0 no if
 
             if (comparacao < 0) {
                 fim = meio - 1;

@@ -29,11 +29,7 @@ public abstract class ArvoreBinariaAbstract<T> {
     }
 
     public boolean pertence(T info) {
-        if (buscar(info) == null) {
-            return false;
-        }
-
-        return true;
+        return buscar(info) != null;
     }
 
     public abstract NoArvoreBinaria<T> buscar(T info);
