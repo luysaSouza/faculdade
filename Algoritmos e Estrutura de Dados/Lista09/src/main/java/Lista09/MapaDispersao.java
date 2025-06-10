@@ -92,4 +92,63 @@ public class MapaDispersao<T>{
 
         return (1.0 * qntDeObjetosAdicionados) / info.length; // 1.0 torna o retorno em um numero decimal
     }
+
+    //Verifica se uma chave está presente no mapa
+    public boolean contemChave(int chave) {
+        int indice = calcularHash(chave);
+        if (info[indice] != null) {
+            NoMapa<T> noBusca = new NoMapa<>();
+            noBusca.setChave(chave);
+            return info[indice].buscar(noBusca) != null;
+        }
+        return false;
+    }
+
+    //Retorna a quantidade total de elementos armazenados no mapa
+    public int quantidadeElementos() {
+        int total = 0;
+        for (ListaEncadeada<NoMapa<T>> lista : info) {
+            if (lista != null) {
+                total += lista.obterComprimento();
+            }
+        }
+        return total;
+    }
+
+    //Conta quantos índices do vetor possuem mais de um elemento (indicando colisões).
+    public int contarColisoes() {
+        int colisoes = 0;
+        for (ListaEncadeada<NoMapa<T>> lista : info) {
+            if (lista != null && lista.obterComprimento() > 1) {
+                colisoes++;
+            }
+        }
+        return colisoes;
+    }
+
+    //Exibe todos os elementos armazenados no mapa (útil para testes e debug).
+    public void exibirMapa() {
+        for (int i = 0; i < info.length; i++) {
+            System.out.print("[" + i + "]: ");
+            if (info[i] != null) {
+                NoLista<NoMapa<T>> atual = info[i].getPrimeiro();
+                while (atual != null) {
+                    System.out.print("(" + atual.getInfo().getChave() + " -> " + atual.getInfo().getValor() + ") ");
+                    atual = atual.getProximo();
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    //Retorna o maior número de elementos encontrados em uma única lista (índice com mais colisões).
+    public int tamanhoMaximoLista() {
+        int max = 0;
+        for (ListaEncadeada<NoMapa<T>> lista : info) {
+            if (lista != null) {
+                max = Math.max(max, lista.obterComprimento());
+            }
+        }
+        return max;
+    }
 }
