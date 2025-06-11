@@ -67,5 +67,25 @@ public class App {
         // Fator de carga
         System.out.println("\n>>> Fator de carga:");
         System.out.println("Fator de carga: " + mapa2.calcularFatorCarga());
+
+        System.out.println("\n>>> Quantidade de listas não vazias:");
+        System.out.println("Listas não vazias: " + mapa2.quantidadeListasNaoVazias());
+
+        System.out.println("\n>>> Verificar se o mapa está vazio:");
+        System.out.println("Está vazio? " + mapa2.estaVazio());
+
+        System.out.println("\n>>> Carga média por lista:");
+        System.out.println("Carga média: " + mapa2.cargaMediaPorLista());
+
+        System.out.println("\n>>> Substituir um aluno:");
+        Aluno novoA1 = new Aluno(12000, "Jean Atualizado", LocalDate.of(2000, 1, 1));
+        Aluno anterior = mapa2.substituir(12000, novoA1);
+        System.out.println("Anterior: " + anterior);
+        System.out.println("Novo: " + mapa2.buscar(12000));
+
+        System.out.println("\n>>> Limpar o mapa:");
+        mapa2.limpar();
+        mapa2.exibirMapa();
+        System.out.println("Está vazio agora? " + mapa2.estaVazio());
     }
 }

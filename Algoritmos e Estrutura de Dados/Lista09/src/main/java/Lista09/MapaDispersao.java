@@ -151,4 +151,99 @@ public class MapaDispersao<T>{
         }
         return max;
     }
+
+    //Remove todos os elementos do mapa de dispersão.
+    public void limpar() {
+        for (int i = 0; i < info.length; i++) {
+            info[i] = null;
+        }
+    }
+
+    //Substitui o valor associado a uma chave e retorna o valor antigo (sem alterar a posição na lista).
+    public T substituir(int chave, T novoValor) {
+        int indice = calcularHash(chave);
+
+        if (info[indice] != null) {
+            NoMapa<T> noBusca = new NoMapa<>();
+            noBusca.setChave(chave);
+            NoLista<NoMapa<T>> no = info[indice].buscar(noBusca);
+            if (no != null) {
+                T valorAntigo = no.getInfo().getValor();
+                no.getInfo().setValor(novoValor);
+                return valorAntigo;
+            }
+        }
+        return null;
+    }
+
+    //Conta quantas posições do vetor estão ocupadas com pelo menos um elemento.
+    public int quantidadeListasNaoVazias() {
+        int contador = 0;
+        for (ListaEncadeada<NoMapa<T>> lista : info) {
+            if (lista != null && lista.obterComprimento() > 0) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    //Verifica se o mapa está completamente vazio.
+    public boolean estaVazio() {
+        for (ListaEncadeada<NoMapa<T>> lista : info) {
+            if (lista != null && lista.obterComprimento() > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Calcula a média de elementos por lista não vazia.
+    public double cargaMediaPorLista() {
+        int totalElementos = quantidadeElementos();
+        int listasNaoVazias = quantidadeListasNaoVazias();
+
+        if (listasNaoVazias == 0) return 0.0;
+
+        return (double) totalElementos / listasNaoVazias;
+    }
+
+    //Retorna o tamanho total do vetor interno (quantidade de listas possíveis).
+    public int obterTamanhoVetor() {
+        return info.length;
+    }
+
+    //Conta o total de colisões reais (elementos além do primeiro em cada lista).
+    public int quantidadeColisoesTotais() {
+        int total = 0;
+        for (ListaEncadeada<NoMapa<T>> lista : info) {
+            if (lista != null && lista.obterComprimento() > 1) {
+                total += lista.obterComprimento() - 1;
+            }
+        }
+        return total;
+    }
+
+    //Retorna a quantidade de elementos em uma posição específica do vetor.
+    public int quantidadeElementosNoIndice(int indice) {
+        if (indice >= 0 && indice < info.length && info[indice] != null) {
+            return info[indice].obterComprimento();
+        }
+        return 0;
+    }
+
+    //Retorna o primeiro valor armazenado em um índice (útil para depuração e análise de colisões).
+    public T obterPrimeiroValorNoIndice(int indice) {
+        if (indice >= 0 && indice < info.length && info[indice] != null) {
+            NoLista<NoMapa<T>> no = info[indice].getPrimeiro();
+            if (no != null) {
+                return no.getInfo().getValor();
+            }
+        }
+        return null;
+    }
+
+    //Verifica se há mais de um elemento no índice especificado.
+    public boolean possuiColisaoNoIndice(int indice) {
+        return quantidadeElementosNoIndice(indice) > 1;
+    }
 }
