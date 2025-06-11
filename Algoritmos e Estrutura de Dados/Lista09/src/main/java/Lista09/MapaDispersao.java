@@ -90,7 +90,24 @@ public class MapaDispersao<T>{
                 qntDeObjetosAdicionados += info[i].obterComprimento(); // obterComprimento da ListaEncadeada
         }
 
-        return (1.0 * qntDeObjetosAdicionados) / info.length; // 1.0 torna o retorno em um numero decimal
+        return (1.0 * qntDeObjetosAdicionados) / info.length; // 1.0 torna o retorno um número decimal
+    }
+
+    //O metodo devera copiar todos os dados armazenados no outroMapa para o mapa corrente.
+    public void incluirTodos(MapaDispersao<T> outroMapa) {
+        for (int i = 0; i < outroMapa.info.length; i++) {
+            ListaEncadeada<NoMapa<T>> lista = outroMapa.info[i];
+
+            if (lista != null) {
+                NoLista<NoMapa<T>> atual = lista.getPrimeiro(); // getInicio da ListaEncadeada
+
+                while (atual != null) {
+                    NoMapa<T> no = atual.getInfo();
+                    this.inserir(no.getChave(), no.getValor());
+                    atual = atual.getProximo();
+                }
+            }
+        }
     }
 
     //Verifica se uma chave está presente no mapa

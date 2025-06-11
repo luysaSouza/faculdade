@@ -87,5 +87,27 @@ public class App {
         mapa2.limpar();
         mapa2.exibirMapa();
         System.out.println("Está vazio agora? " + mapa2.estaVazio());
+
+        //-----------------------------------------
+        MapaDispersao<String> mapa3 = new MapaDispersao<>(10);
+        MapaDispersao<String> mapa4 = new MapaDispersao<>(10);
+
+        mapa3.inserir(1, "João");
+        mapa3.inserir(2, "Maria");
+
+        mapa4.inserir(3, "Pedro");
+        mapa4.inserir(4, "Ana");
+
+        System.out.println("Mapa 1 antes de incluir:");
+        mapa3.exibirMapa();
+
+        System.out.println("\nMapa 2:");
+        mapa4.exibirMapa();
+
+        // Incluir todos os elementos do mapa2 em mapa1
+        mapa3.incluirTodos(mapa4);
+
+        System.out.println("\nMapa 1 depois de incluirTodos:");
+        mapa3.exibirMapa();
     }
 }
